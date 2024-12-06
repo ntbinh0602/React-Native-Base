@@ -1,5 +1,6 @@
+import { HomeDesigner } from 'assets';
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,6 +23,9 @@ const HomeScreen: React.FunctionComponent<HomeNavigationProps> = () => {
       <Text accessibilityRole="text" style={styles.title}>
         {translate('screen.home.title')}
       </Text>
+      <View style={styles.icon}>
+        <HomeDesigner width={200} />
+      </View>
       <Button
         accessibilityState={{ disabled: false }}
         title="⚙️"
