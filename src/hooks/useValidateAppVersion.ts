@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Linking, Platform } from 'react-native';
 import Config from 'react-native-config';
-import DeviceInfo from 'react-native-device-info';
 
-import remoteConfig from '@react-native-firebase/remote-config';
+// import DeviceInfo from 'react-native-device-info';
 
-enum RemoteFields {
-  MINIMUM_VERSION = 'minimum_version',
-}
+// import remoteConfig from '@react-native-firebase/remote-config';
+
+// enum RemoteFields {
+//   MINIMUM_VERSION = 'minimum_version',
+// }
 
 export const useValidateAppVersion = () => {
   const [isUpdateAvailable, setIsUpdateAvailable] = useState<boolean | undefined>(false);
@@ -19,37 +20,36 @@ export const useValidateAppVersion = () => {
     });
   };
 
-  const compareVersions = (local: string, remote: string) => {
-    if (!local || !remote) {
-      return false;
-    }
+  // const compareVersions = (local: string, remote: string) => {
+  //   if (!local || !remote) {
+  //     return false;
+  //   }
 
-    const localVersion = local.split('.').map(versionNumber => parseInt(versionNumber, 10));
-    const remoteVersion = remote.split('.').map(versionNumber => parseInt(versionNumber, 10));
+  //   const localVersion = local.split('.').map(versionNumber => parseInt(versionNumber, 10));
+  //   const remoteVersion = remote.split('.').map(versionNumber => parseInt(versionNumber, 10));
 
-    for (let i = 0; i < Math.max(localVersion.length, remoteVersion.length); i++) {
-      const localVersionComponent = localVersion[i] || 0;
-      const remoteVersionComponent = remoteVersion[i] || 0;
+  //   for (let i = 0; i < Math.max(localVersion.length, remoteVersion.length); i++) {
+  //     const localVersionComponent = localVersion[i] || 0;
+  //     const remoteVersionComponent = remoteVersion[i] || 0;
 
-      if (localVersionComponent < remoteVersionComponent) {
-        return true;
-      }
-    }
-  };
+  //     if (localVersionComponent < remoteVersionComponent) {
+  //       return true;
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     const checkUpdate = async () => {
       try {
-        remoteConfig().setDefaults({
-          minimum_version: '',
-        });
-
-        await remoteConfig().fetchAndActivate();
-
-        const remoteVersion = remoteConfig().getValue(RemoteFields.MINIMUM_VERSION).asString();
-        const localVersion = DeviceInfo.getVersion();
-        const updateAvailable = compareVersions(localVersion, remoteVersion);
-        setIsUpdateAvailable(updateAvailable);
+        // remoteConfig().setDefaults({
+        //   minimum_version: '',
+        // });
+        // await remoteConfig().fetchAndActivate();
+        // const remoteVersion = remoteConfig().getValue(RemoteFields.MINIMUM_VERSION).asString();
+        // const localVersion = DeviceInfo.getVersion();
+        // const updateAvailable = compareVersions(localVersion, remoteVersion);
+        // setIsUpdateAvailable(updateAvailable);
+        setIsUpdateAvailable(false);
       } catch (err) {
         console.log(err);
       }
@@ -57,5 +57,8 @@ export const useValidateAppVersion = () => {
     checkUpdate();
   }, []);
 
-  return { isUpdateAvailable, openStore };
+  return {
+    isUpdateAvailable,
+    openStore,
+  };
 };

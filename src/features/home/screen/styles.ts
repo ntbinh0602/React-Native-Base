@@ -17,6 +17,7 @@ const useStyles = () => {
       fontWeight: 'bold',
       color: colors.text,
     },
+    icon: {},
     button: {
       position: 'absolute',
       top: 20,
